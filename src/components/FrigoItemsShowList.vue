@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, reactive, watch} from "vue";
+import {onMounted, reactive} from "vue";
 import FrigoItem from "@/js/FrigoItem";
 import FrigoItemCard from "@/components/FrigoItemCard.vue";
 
@@ -8,7 +8,7 @@ const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/19/produits"
 
 
 function fetchFrigoItems() {
-  listeFrigoItems.splice(0, listeFrigoItems.length - 1);
+  listeFrigoItems.splice(0, listeFrigoItems.length);
   fetch(url)
     .then((response) => {
       return response.json()
@@ -23,7 +23,7 @@ function fetchFrigoItems() {
       console.log(error)
     })
 }
-/*
+
 function fetchForPostPut(fetchUrl, fetchOptions) {
   fetch(fetchUrl, fetchOptions)
     .then((reponse) => {
@@ -33,6 +33,7 @@ function fetchForPostPut(fetchUrl, fetchOptions) {
       if (dataJson.status === 0) {
         console.log(fetchOptions);
       }
+      fetchFrigoItems();
     })
     .catch((error) => {
       console.log(error)
@@ -49,15 +50,8 @@ function handlerRemove(frigoItem) {
   fetchForPostPut(url, frigoItem.removeQtyOption);
 }
 
- */
 
-/*
 
-watch(listeFrigoItems, (change) => {
-  console.log(change)
-  fetchFrigoItems();
-})
-*/
 onMounted(() => {
   fetchFrigoItems();
 })
@@ -68,10 +62,11 @@ onMounted(() => {
   <v-row dense>
     <FrigoItemCard v-for="frigoItem in listeFrigoItems"
                    :key="`${frigoItem.id}`"
-                   :frigoItem="frigoItem"/>
-                   <!--
+                   :frigoItem="frigoItem"
                    :handlerRemove="handlerRemove"
-                   :handlerAdd="handlerAdd" -->
+                   :handlerAdd="handlerAdd"/>
+
+
   </v-row>
 </template>
 

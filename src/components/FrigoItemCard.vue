@@ -23,8 +23,8 @@ defineProps(["frigoItem", "handlerAdd", "handlerRemove"]);
             <v-col cols="12">
               {{frigoItem.qty}} - {{ frigoItem.nom }}
               <br>
-              <v-btn class="v-btn--small">-</v-btn>
-              <v-btn class="v-btn--small">+</v-btn>
+              <v-btn @click="handlerRemove(frigoItem)" class="v-btn--small">-</v-btn>
+              <v-btn @click="handlerAdd(frigoItem)" class="v-btn--small">+</v-btn>
             </v-col>
           </v-row>
         </v-container>

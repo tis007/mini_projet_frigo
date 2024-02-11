@@ -39,8 +39,8 @@ export default class FrigoItem {
 
     return {
       method: "PUT",
-      //headers: myHeaders,
-      body: JSON.stringify({id: this.id, nom: this.nom, qty: qtyToChange, photo: this.photo}),
+      headers: myHeaders,
+      body: JSON.stringify({id: this.id, nom: this.nom, qte: qtyToChange, photo: this.photo}),
     };
   }
 
