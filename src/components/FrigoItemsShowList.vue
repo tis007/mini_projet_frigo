@@ -8,13 +8,12 @@ const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/19/produits"
 
 
 function fetchFrigoItems() {
-  listeFrigoItems.splice(0, listeFrigoItems.length);
   fetch(url)
     .then((response) => {
       return response.json()
     })
     .then((dataJson) => {
-      listeFrigoItems.splice(0, listeFrigoItems.length - 1);
+      listeFrigoItems.splice(0, listeFrigoItems.length);
       for (let item of dataJson) {
         listeFrigoItems.push(new FrigoItem(item.id, item.nom, item.qte, item.photo));
       }
