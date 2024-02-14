@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["frigoItem", "handlerAdd", "handlerRemove"]);
+defineProps(["produit", "handlerAdd", "handlerRemove"]);
 
 </script>
 
@@ -12,8 +12,8 @@ defineProps(["frigoItem", "handlerAdd", "handlerRemove"]);
     xl="2">
     <v-card color="primary">
       <v-img
-        :src="`${frigoItem.photo}`"
-        :alt="`${frigoItem.nom}` + ' image'"
+        :src="`${produit.photo}`"
+        :alt="`${produit.nom}` + ' image'"
         height="200px"
         cover
       ></v-img>
@@ -21,10 +21,10 @@ defineProps(["frigoItem", "handlerAdd", "handlerRemove"]);
         <v-container>
           <v-row>
             <v-col cols="12">
-              {{frigoItem.qty}} - {{ frigoItem.nom }}
+              {{produit.qte}} - {{ produit.nom }}
               <br>
-              <v-btn @click="handlerRemove(frigoItem)" class="v-btn--small">-</v-btn>
-              <v-btn @click="handlerAdd(frigoItem)" class="v-btn--small">+</v-btn>
+              <v-btn @click="handlerRemove(produit)" class="v-btn--small">-</v-btn>
+              <v-btn @click="handlerAdd(produit)" class="v-btn--small">+</v-btn>
             </v-col>
           </v-row>
         </v-container>

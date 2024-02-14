@@ -1,4 +1,4 @@
-export default class FrigoItem {
+export default class Produit {
   /*
   constructor(frigoItemJSON) { // en paramètre un film au format JSON
     this._id = frigoItemJSON.id;
@@ -8,7 +8,7 @@ export default class FrigoItem {
   }
    */
 
-  constructor(id, nom, qty, photo) {
+  constructor(id, nom, qte, photo) {
     /*
     if (qty < 0) {
       throw Error("qty is negative");
@@ -17,28 +17,28 @@ export default class FrigoItem {
      */
     this._id = id;
     this._nom = nom;
-    this._qty = qty;
+    this._qte = qte;
     this._photo = photo ?? "";
   }
 
   get postOptions() {
-    return this.addRemoveOrPostQtyOption(this.qty)
+    return this.addRemoveOrPostQtyOption(this.qte, "POST")
   }
 
   get addQtyOption() {
-    return this.addRemoveOrPostQtyOption(this.qty + 1)
+    return this.addRemoveOrPostQtyOption(this.qte + 1, "PUT")
   }
 
   get removeQtyOption() {
-    return this.addRemoveOrPostQtyOption(this.qty - 1)
+    return this.addRemoveOrPostQtyOption(this.qte - 1, "PUT")
   }
 
-  addRemoveOrPostQtyOption(qtyToChange) {
+  addRemoveOrPostQtyOption(qtyToChange, method) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     return {
-      method: "PUT",
+      method: method,
       headers: myHeaders,
       body: JSON.stringify({id: this.id, nom: this.nom, qte: qtyToChange, photo: this.photo}),
     };
@@ -53,8 +53,8 @@ export default class FrigoItem {
     return this._nom;
   }
 
-  get qty() {
-    return this._qty;
+  get qte() {
+    return this._qte;
   }
 
   get photo() {
