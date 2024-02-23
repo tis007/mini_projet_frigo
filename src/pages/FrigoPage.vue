@@ -4,8 +4,7 @@ import FrigoItemsShowList from "@/components/FrigoItemsShowList.vue";
 </script>
 
 <template>
-  <FrigoItemsShowList/>
-
+    <FrigoItemsShowList/>
 </template>
 
 <style scoped>

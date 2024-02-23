@@ -1,6 +1,7 @@
 <script setup>
-import Produit from "@/js/Produit";
+
 import {ref} from "vue";
+import Produit from "@/js/Produit";
 
 const emit = defineEmits(["handlerAddProduits"]);
 
@@ -12,11 +13,11 @@ const data = ref({
 });
 function filterInput(inputEvent) {
 
-  if(!inputEvent.target.value.length && inputEvent.key === '-'){
+  if (!inputEvent.target.value.length && inputEvent.key === '-') {
     return true;
   }
 
-  if(!Number.isInteger(Number(inputEvent.key))) {
+  if (!Number.isInteger(Number(inputEvent.key))) {
     // Of course, you can choose any other method to check if the key
     // pressed was a number key, for ex. check if the event.keyCode is
     // in range 48-57.
@@ -25,6 +26,10 @@ function filterInput(inputEvent) {
 
   return true;
 }
+
+
+
+
 function addProduit() {
   let produitToAdd = new Produit(-1, data.value.itemName, data.value.quantity, data.value.photoUrl);
   emit('handlerAddProduits', produitToAdd);
@@ -38,9 +43,9 @@ function addProduit() {
 
 <template>
   <v-row justify="center">
-    <v-dialog v-model="data.dialog" width="1024">
+    <v-dialog v-model="data.dialog" max-width="1024">
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Open Dialog</v-btn>
+        <v-btn class="btn" v-bind="props" fluid >Ajouter un produit</v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -50,13 +55,15 @@ function addProduit() {
           <v-container>
             <v-row>
               <v-col cols="12" sm="9" md="6">
-                <v-text-field v-model="data.itemName" label="Nom du produit *" required ></v-text-field>
+                <v-text-field v-model="data.itemName" label="Nom du produit *" required></v-text-field>
               </v-col>
               <v-col cols="12" sm="9" md="6">
-                <v-text-field v-model="data.quantity" label="Quantitée *" required type="number" min="1" @keydown="filterInput"></v-text-field>
+                <v-text-field v-model="data.quantity" label="Quantitée *" required type="number" min="1"
+                              @keydown="filterInput"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="data.photoUrl" label="photo du produit" hint="url de la photo"></v-text-field>
+                <v-text-field v-model="data.photoUrl" label="photo du produit"
+                              hint="url de la photo"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -76,7 +83,12 @@ function addProduit() {
   </v-row>
 </template>
 
-
 <style scoped>
 
+.btn{
+  background-color: #006bb3;
+  margin: 10px;
+  padding: 0;
+  width: 100%;
+}
 </style>

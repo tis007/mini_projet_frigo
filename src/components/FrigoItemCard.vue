@@ -10,14 +10,14 @@ defineProps(["produit", "handlerAdd", "handlerRemove"]);
     md="3"
     lg="2"
     xl="2">
-    <v-card color="primary">
+    <v-card class="card">
       <v-img
         :src="`${produit.photo}`"
         :alt="`${produit.nom}` + ' image'"
         height="200px"
         cover
       ></v-img>
-      <v-card-title>
+      <v-card-title class="card-title" >
         <v-container>
           <v-row>
             <v-col cols="12">
@@ -34,5 +34,10 @@ defineProps(["produit", "handlerAdd", "handlerRemove"]);
 </template>
 
 <style scoped>
-
+ .card-title{
+   background-color: rgba(107, 154, 175, 0.65);
+}
+ .card {
+   background-color: rgba(0, 0, 0, 0);
+ }
 </style>

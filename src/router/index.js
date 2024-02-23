@@ -6,7 +6,6 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import FrigoItemsShowList from "@/components/FrigoItemsShowList.vue";
 //import { setupLayouts } from 'virtual:generated-layouts'
 
 const router = createRouter({
