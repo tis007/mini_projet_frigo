@@ -7,6 +7,8 @@ import SearchAndAddNewItemPopUp from "@/components/SearchAndAddNewItemPopUp.vue"
 const listeProduits = reactive([]);
 const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/20/produits"
 
+let searchQuery = '';
+
 function fetchProduits() {
   fetch(url)
     .then((response) => {
@@ -15,7 +17,9 @@ function fetchProduits() {
     .then((dataJson) => {
       listeProduits.splice(0, listeProduits.length);
       for (let produit of dataJson) {
-        listeProduits.push(new Produit(produit.id, produit.nom, produit.qte, produit.photo));
+        if (produit.nom.toUpperCase().includes(searchQuery.toUpperCase()) === true) {
+          listeProduits.push(new Produit(produit.id, produit.nom, produit.qte, produit.photo));
+        }
       }
       checkIfSomeItemsAreAtZero();
     })
@@ -56,19 +60,24 @@ function handlerDelete(idProduit) {
   const fetchOptionsDelete = {
     method: "DELETE"
   }
-fetch(url + "/" + idProduit, fetchOptionsDelete)
-  .then((reponse) => {
-    return reponse.json();
-  })
-  .then((dataJson) => {
-    if (dataJson.status !== 1) {
-      console.log(idProduit + " " + dataJson);
-    }
-    fetchProduits();
-  })
-  .then((error) => {
-    console.log(error);
-  })
+  fetch(url + "/" + idProduit, fetchOptionsDelete)
+    .then((reponse) => {
+      return reponse.json();
+    })
+    .then((dataJson) => {
+      if (dataJson.status !== 1) {
+        console.log(idProduit + " " + dataJson);
+      }
+      fetchProduits();
+    })
+    .then((error) => {
+      console.log(error);
+    })
+}
+
+function handlerUpdateSearchQuery(newSearchQuery) {
+  searchQuery = newSearchQuery;
+  fetchProduits()
 }
 
 function handlerAdd(produit) {
@@ -79,7 +88,6 @@ function handlerRemove(produit) {
   fetchForPostPut(url, produit.removeQtyOption);
 }
 
-
 onMounted(() => {
   fetchProduits();
 })
@@ -88,7 +96,7 @@ onMounted(() => {
 <template>
   <h3>Items du frigo :</h3><br>
   <v-row dense>
-    <SearchAndAddNewItemPopUp @handlerAddProduits="handlerAddProduits"/>
+    <SearchAndAddNewItemPopUp @handlerAddProduits="handlerAddProduits" @handlerUpdateSearchQuery="handlerUpdateSearchQuery"/>
     <FrigoItemCard v-for="produit in listeProduits"
                    :key="`${produit.id}`"
                    :produit="produit"

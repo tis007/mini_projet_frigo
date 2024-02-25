@@ -2,11 +2,15 @@
 
 import AddNewItemComponent from "@/components/AddNewItemComponent.vue";
 import SearchComponent from "@/components/SearchComponent.vue";
-const emit = defineEmits(['handlerAddProduits']);
 
+const emit = defineEmits(['handlerAddProduits', 'handlerUpdateSearchQuery']);
 
 function handlerAddProduits(produit) {
   emit('handlerAddProduits', produit);
+}
+
+function handlerUpdateSearchQuery(searchQuery) {
+  emit('handlerUpdateSearchQuery', searchQuery)
 }
 </script>
 
@@ -18,7 +22,7 @@ function handlerAddProduits(produit) {
     lg="2"
     xl="2">
     <v-card class="card">
-      <SearchComponent/>
+      <SearchComponent @handlerUpdateSearchQuery="handlerUpdateSearchQuery"/>
 
     </v-card>
     <v-card class="card">

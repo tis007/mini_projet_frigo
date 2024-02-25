@@ -1,10 +1,18 @@
 <script setup>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
-const data = ref({
-  searchQuery: ''
-  }
-)
+const searchQuery = ref('')
+const emit = defineEmits(['handlerUpdateSearchQuery'])
+
+
+function emitSearchQuery(newQuery) {
+  emit('handlerUpdateSearchQuery', newQuery)
+}
+
+watch(searchQuery, (newQuery) => {
+  emitSearchQuery(newQuery);
+})
+
 
 </script>
 
@@ -12,14 +20,14 @@ const data = ref({
 <template>
   <v-container class="search-card" >
     <v-text-field
-      v-model="data.searchQuery"
+      v-model="searchQuery"
       label="Rechercher"
       outlined
       solo-inverted
       prepend-inner-icon="mdi-magnify"
     ></v-text-field>
 
-    <v-btn class="btn" block>
+    <v-btn @click="emitSearchQuery(searchQuery)" class="btn" block>
       Rechercher
     </v-btn>
 
