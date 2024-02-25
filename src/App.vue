@@ -21,12 +21,17 @@
 
 
 <style scoped>
+
 .page {
-  background-image: url('https://st.depositphotos.com/1002539/2687/i/450/depositphotos_26873645-stock-photo-empty-fridge.jpg'); /* Remplacez 'background-image.jpg' par le chemin de votre image */
-  background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'arrière-plan */
-  background-position: center; /* Centre l'image horizontalement et verticalement */
+  background-image: url('assets/frigo.png');
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
+  padding-left: 30%;
+  padding-right: 30%;
+
 }
+
 
 .page {
   min-height: 100vh;

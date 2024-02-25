@@ -1,25 +1,23 @@
 <script setup>
 import {onMounted, reactive} from "vue";
 import Produit from "@/js/Produit";
-import FrigoItemCard from "@/components/FrigoItemCard.vue";
+import FrigoProduitCard from "@/components/FrigoProduitCard.vue";
 import SearchAndAddNewItemPopUp from "@/components/SearchAndAddNewItemPopUp.vue";
 
 const listeProduits = reactive([]);
-const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/20/produits"
+const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/20/produits?search="
 
 let searchQuery = '';
 
 function fetchProduits() {
-  fetch(url)
+  fetch(url + searchQuery)
     .then((response) => {
       return response.json()
     })
     .then((dataJson) => {
       listeProduits.splice(0, listeProduits.length);
       for (let produit of dataJson) {
-        if (produit.nom.toUpperCase().includes(searchQuery.toUpperCase()) === true) {
-          listeProduits.push(new Produit(produit.id, produit.nom, produit.qte, produit.photo));
-        }
+        listeProduits.push(new Produit(produit.id, produit.nom, produit.qte, produit.photo));
       }
       checkIfSomeItemsAreAtZero();
     })
@@ -48,9 +46,10 @@ function fetchForPostPut(fetchUrl, fetchOptions) {
       console.log(fetchOptions)
     })
 }
+
 function checkIfSomeItemsAreAtZero() {
   for (let i = listeProduits.length - 1; i >= 0; i--) {
-    if (listeProduits[i].qte <=0) {
+    if (listeProduits[i].qte <= 0) {
       handlerDelete(listeProduits[i].id)
     }
   }
@@ -94,15 +93,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <h3>Items du frigo :</h3><br>
-  <v-row dense>
-    <SearchAndAddNewItemPopUp @handlerAddProduits="handlerAddProduits" @handlerUpdateSearchQuery="handlerUpdateSearchQuery"/>
-    <FrigoItemCard v-for="produit in listeProduits"
-                   :key="`${produit.id}`"
-                   :produit="produit"
-                   :handlerRemove="handlerRemove"
-                   :handlerAdd="handlerAdd"/>
-  </v-row>
+  <div class="frigo">
+    <h3>Produits du frigo :</h3><br>
+    <v-row dense>
+      <SearchAndAddNewItemPopUp @handlerAddProduits="handlerAddProduits"
+                                @handlerUpdateSearchQuery="handlerUpdateSearchQuery"/>
+      <FrigoProduitCard v-for="produit in listeProduits"
+                        :key="`${produit.id}`"
+                        :produit="produit"
+                        :handlerRemove="handlerRemove"
+                        :handlerAdd="handlerAdd"
+                        :handlerDelete="handlerDelete"/>
+    </v-row>
+  </div>
 </template>
 
 <style scoped>
