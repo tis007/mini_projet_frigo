@@ -4,5 +4,5 @@
 
 <script setup>
   //
-import FrigoItemsShowList from "@/components/FrigoItemsShowList.vue";
+import FrigoItemsShowList from "@/components/FrigoProduitShowList.vue";
 </script>

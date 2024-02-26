@@ -27,11 +27,13 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  padding-left: 30%;
-  padding-right: 30%;
+
 
 }
-
+.page {
+  padding-left: 25%;
+  padding-right: 25%;
+}
 
 .page {
   min-height: 100vh;

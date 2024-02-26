@@ -1,10 +1,10 @@
 <script setup>
 
-import FrigoItemsShowList from "@/components/FrigoItemsShowList.vue";
+import FrigoProduitShowList from "@/components/FrigoProduitShowList.vue";
 </script>
 
 <template>
-    <FrigoItemsShowList/>
+    <FrigoProduitShowList/>
 </template>
 
 <style scoped>

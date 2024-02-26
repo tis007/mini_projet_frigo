@@ -8,19 +8,18 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
   <v-col
     cols="12"
     sm="6"
-    md="3"
-    lg="2"
-    xl="2">
-    <v-card class="card" width="150">
+    md="5"
+    lg="4"
+    xl="4">
+    <v-card class="card">
       <v-img class="image"
         :src="`${produit.photo}`"
         :alt="`${produit.nom}` + ' image'"
         :title="`${produit.nom}`"
-        height="200px"
         cover
       >
-        <v-card-item v-if="produit.photo === ''" class="centered">{{ produit.nom }}</v-card-item>
-        <v-btn @click="handlerDelete(produit.id)" class="top-right">
+        <div v-if="produit.photo === ''" class="d-flex align-end justify-content-center">{{ produit.nom }}</div>
+        <v-btn @click="handlerDelete(produit.id)" size="small" class="top-right px-0" icon="mdi-delete" density="comfortable">
           <v-icon
             icon="mdi-delete"
           />
@@ -29,11 +28,11 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
       <v-card-title class="card-title">
         <v-container>
           <v-row>
-            <v-col cols="12">
+            <v-col class="pa-0" cols="12">
               {{ produit.qte }} - {{ produit.nom }}
               <br>
-              <v-btn @click="handlerRemove(produit)" class="v-btn--small">-</v-btn>
-              <v-btn @click="handlerAdd(produit)" class="v-btn--small">+</v-btn>
+              <v-btn @click="handlerRemove(produit)" size="x-small">-</v-btn>
+              <v-btn @click="handlerAdd(produit)" size="x-small">+</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -45,14 +44,15 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
 <style scoped>
 .card-title {
   background-color: rgba(107, 154, 175, 0.65);
-
+  font-size: math;
+  padding: 0;
+  min-width: 50px;
 }
 
 .card {
   background-color: rgba(0, 0, 0, 0);
-  justify-content: center;
-  padding: 0;
   margin: 0;
+  min-width: 40px;
 }
 
 .top-right {
@@ -67,6 +67,12 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 30px;
+  font-size: math;
+}
+
+.image {
+  height: 10vh;
+  min-height: 40px;
+  object-fit: cover;
 }
 </style>

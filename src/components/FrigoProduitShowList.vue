@@ -2,15 +2,16 @@
 import {onMounted, reactive} from "vue";
 import Produit from "@/js/Produit";
 import FrigoProduitCard from "@/components/FrigoProduitCard.vue";
-import SearchAndAddNewItemPopUp from "@/components/SearchAndAddNewItemPopUp.vue";
+import SearchComponent from "@/components/SearchComponent.vue";
+import AddNewItemComponent from "@/components/AddNewItemComponent.vue";
 
 const listeProduits = reactive([]);
-const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/20/produits?search="
+const url = "https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/20/produits"
 
 let searchQuery = '';
 
 function fetchProduits() {
-  fetch(url + searchQuery)
+  fetch(url + "?search=" + searchQuery)
     .then((response) => {
       return response.json()
     })
@@ -94,11 +95,15 @@ onMounted(() => {
 
 <template>
   <div class="frigo">
-    <h3>Produits du frigo :</h3><br>
+    <v-container class="d-flex pa-0">
+    <SearchComponent class="justify-start" @handlerUpdateSearchQuery="handlerUpdateSearchQuery"></SearchComponent>
+<!--
+    <h3>Produits du frigo :</h3>
+-->
+    <AddNewItemComponent class="justify-end" @handlerAddProduits="handlerAddProduits"></AddNewItemComponent>
+    </v-container>
     <v-row dense>
-      <SearchAndAddNewItemPopUp @handlerAddProduits="handlerAddProduits"
-                                @handlerUpdateSearchQuery="handlerUpdateSearchQuery"/>
-      <FrigoProduitCard v-for="produit in listeProduits"
+      <FrigoProduitCard class="frigoCard pt-5" v-for="produit in listeProduits"
                         :key="`${produit.id}`"
                         :produit="produit"
                         :handlerRemove="handlerRemove"
@@ -109,5 +114,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
+
 
 </style>

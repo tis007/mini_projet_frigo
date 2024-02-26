@@ -12,15 +12,9 @@ const data = ref({
   photoUrl: ''
 });
 function filterInput(inputEvent) {
+  const allowedInput = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
 
-  if (!inputEvent.target.value.length && inputEvent.key === '-') {
-    return true;
-  }
-
-  if (!Number.isInteger(Number(inputEvent.key))) {
-    // Of course, you can choose any other method to check if the key
-    // pressed was a number key, for ex. check if the event.keyCode is
-    // in range 48-57.
+  if (!Number.isInteger(Number(inputEvent.key)) && !(allowedInput.includes(inputEvent.key))) {
     inputEvent.preventDefault();
   }
 
@@ -42,10 +36,10 @@ function addProduit() {
 </script>
 
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="data.dialog" max-width="1024">
+    <v-container>
+    <v-dialog v-model="data.dialog" class="justify-center" max-width="1024">
       <template v-slot:activator="{ props }">
-        <v-btn class="btn" v-bind="props" fluid >Ajouter un produit</v-btn>
+        <v-btn class="btn" v-bind="props" fluid >Ajouter</v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -80,7 +74,7 @@ function addProduit() {
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
+  </v-container>
 </template>
 
 <style scoped>
@@ -89,6 +83,7 @@ function addProduit() {
   background-color: #006bb3;
   margin: 10px;
   padding: 0;
-  width: 100%;
+  width: 11vw;
+  min-width: 90px;
 }
 </style>
