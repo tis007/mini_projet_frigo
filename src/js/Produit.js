@@ -1,20 +1,7 @@
 export default class Produit {
-  /*
-  constructor(frigoItemJSON) { // en paramètre un film au format JSON
-    this._id = frigoItemJSON.id;
-    this._nom = frigoItemJSON.nom;
-    this._qty = frigoItemJSON.qty;
-    this._photo = frigoItemJSON.photo ?? "";
-  }
-   */
 
   constructor(id, nom, qte, photo) {
-    /*
-    if (qty < 0) {
-      throw Error("qty is negative");
-    }
 
-     */
     this._id = id;
     this._nom = nom;
     this._qte = qte;

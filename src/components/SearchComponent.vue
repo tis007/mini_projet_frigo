@@ -45,8 +45,4 @@ watch(searchQuery, (newQuery) => {
   min-width: 180px;
 }
 
-.btn {
-  color: black;
-  background-color: #006bb3;
-}
 </style>

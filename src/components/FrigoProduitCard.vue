@@ -13,17 +13,16 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
     xl="4">
     <v-card class="card">
       <v-img class="image"
-        :src="`${produit.photo}`"
-        :alt="`${produit.nom}` + ' image'"
-        :title="`${produit.nom}`"
-        cover
+             :src="`${produit.photo}`"
+             :alt="`${produit.nom}` + ' image'"
+             :title="`${produit.nom}`"
+             cover
       >
-        <div v-if="produit.photo === ''" class="d-flex align-end justify-content-center">{{ produit.nom }}</div>
-        <v-btn @click="handlerDelete(produit.id)" size="small" class="top-right px-0" icon="mdi-delete" density="comfortable">
-          <v-icon
-            icon="mdi-delete"
-          />
-        </v-btn>
+        <v-card-text v-if="produit.photo === ''" class="flex-fill align-content-center justify-content-center">
+          {{ produit.nom }}
+        </v-card-text>
+        <v-btn @click="handlerDelete(produit.id)" size="small" class="top-right px-0" icon="mdi-delete"
+               density="comfortable"></v-btn>
       </v-img>
       <v-card-title class="card-title">
         <v-container>
@@ -62,6 +61,7 @@ defineProps(["produit", "handlerAdd", "handlerRemove", "handlerDelete"]);
   background-color: rgba(107, 154, 175, 0.65);
 
 }
+
 .centered {
   position: absolute;
   top: 50%;
